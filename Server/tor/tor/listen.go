@@ -8,8 +8,8 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/x3419/TorMent/Server/tor/control"
-	"github.com/x3419/TorMent/Server/tor/torutil/ed25519"
+	"github.com/x3419/TorgoBot/Server/tor/control"
+	"github.com/x3419/TorgoBot/Server/tor/torutil/ed25519"
 	othered25519 "golang.org/x/crypto/ed25519"
 )
 

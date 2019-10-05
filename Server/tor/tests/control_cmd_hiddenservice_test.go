@@ -7,7 +7,7 @@ package tests
 //	"testing"
 //	"time"
 //
-//	"github.com/x3419/TorMent/Server/tor/control"
+//	"github.com/x3419/TorgoBot/Server/tor/control"
 //)
 //
 //func TestHSFetch(t *testing.T) {

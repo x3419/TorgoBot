@@ -16,7 +16,7 @@ import (
 	//"strings"
 	"syscall"
 
-	"github.com/x3419/TorMent/Server/tor/utils"
+	"github.com/x3419/TorgoBot/Server/tor/utils"
 )
 
 const (

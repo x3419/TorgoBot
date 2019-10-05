@@ -20,9 +20,9 @@
 package embedded
 
 import (
-	"github.com/x3419/TorMent/Server/tor/process"
+	"github.com/x3419/TorgoBot/Server/tor/process"
 
-	tor035 "github.com/x3419/TorMent/Server/tor/process/embedded/tor-0.3.5"
+	tor035 "github.com/x3419/TorgoBot/Server/tor/process/embedded/tor-0.3.5"
 )
 
 // NewCreator creates a process.Creator for statically-linked Tor embedded in

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/x3419/TorMent/Server/tor/process"
+	"github.com/x3419/TorgoBot/Server/tor/process"
 )
 
 /*

@@ -4,8 +4,8 @@ package tests
 //import (
 //	"testing"
 //
-//	"github.com/x3419/TorMent/Server/tor/tor"
-//	"github.com/x3419/TorMent/Server/tor/torutil/geoipembed"
+//	"github.com/x3419/TorgoBot/Server/tor/tor"
+//	"github.com/x3419/TorgoBot/Server/tor/torutil/geoipembed"
 //)
 //
 //func TestEmbeddedGeoIPFile(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	tor033 "github.com/x3419/TorMent/Server/tor/process/embedded/tor-0.3.3"
+	tor033 "github.com/x3419/TorgoBot/Server/tor/process/embedded/tor-0.3.3"
 )
 
 // Simply calls Tor will the same parameters

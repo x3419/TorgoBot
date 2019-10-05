@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/x3419/TorMent/Server/tor/torutil"
+	"github.com/x3419/TorgoBot/Server/tor/torutil"
 )
 
 // EventCode represents an asynchronous event code (ref control spec 4.1).

@@ -11,9 +11,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/x3419/TorMent/Server/tor/control"
-	"github.com/x3419/TorMent/Server/tor/prepareTor"
-	"github.com/x3419/TorMent/Server/tor/process"
+	"github.com/x3419/TorgoBot/Server/tor/control"
+	"github.com/x3419/TorgoBot/Server/tor/prepareTor"
+	"github.com/x3419/TorgoBot/Server/tor/process"
 )
 
 // Tor is the wrapper around the Tor process and control port connection. It

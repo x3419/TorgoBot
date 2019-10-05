@@ -12,7 +12,7 @@ import (
 	"errors"
 	"io"
 
-	"github.com/x3419/TorMent/Server/tor/torutil/ed25519/internal/edwards25519"
+	"github.com/x3419/TorgoBot/Server/tor/torutil/ed25519/internal/edwards25519"
 	"golang.org/x/crypto/ed25519"
 )
 

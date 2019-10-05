@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/x3419/TorMent/Server/tor/torutil/ed25519/internal/edwards25519"
+	"github.com/x3419/TorgoBot/Server/tor/torutil/ed25519/internal/edwards25519"
 )
 
 // Taken from https://github.com/golang/crypto/blob/1a580b3eff7814fc9b40602fd35256c63b50f491/ed25519/ed25519_test.go

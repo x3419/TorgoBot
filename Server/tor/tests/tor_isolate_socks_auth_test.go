@@ -8,7 +8,7 @@ package tests
 //	"testing"
 //	"time"
 //
-//	"github.com/x3419/TorMent/Server/tor/tor"
+//	"github.com/x3419/TorgoBot/Server/tor/tor"
 //	"golang.org/x/net/proxy"
 //)
 //

@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/x3419/TorMent/Server/tor/torutil"
-	"github.com/x3419/TorMent/Server/tor/torutil/ed25519"
+	"github.com/x3419/TorgoBot/Server/tor/torutil"
+	"github.com/x3419/TorgoBot/Server/tor/torutil/ed25519"
 )
 
 // KeyType is a key type for Key in AddOnion.

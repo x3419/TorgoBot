@@ -5,7 +5,7 @@ import (
 	"bytes"
 	b64 "encoding/base64"
 	"fmt"
-	"github.com/x3419/TorMent/Server/tor/tor"
+	"github.com/x3419/TorgoBot/Server/tor/tor"
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"net/http"

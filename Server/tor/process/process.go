@@ -16,7 +16,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/x3419/TorMent/Server/tor/torutil"
+	"github.com/x3419/TorgoBot/Server/tor/torutil"
 )
 
 // Process is the interface implemented by Tor processes.

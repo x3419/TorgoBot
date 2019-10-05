@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/x3419/TorMent/Server/tor/torutil/ed25519"
+	"github.com/x3419/TorgoBot/Server/tor/torutil/ed25519"
 	"golang.org/x/crypto/sha3"
 )
 
