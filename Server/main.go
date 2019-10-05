@@ -141,8 +141,8 @@ func run() error {
 
 	})
 
-	// Wait at most a few minutes to publish the service
-	listenCtx, listenCancel := context.WithTimeout(context.Background(), 3*time.Minute)
+	// Wait at most a few minutes to publish the service               ~~ Changed to 1 min ~~~
+	listenCtx, listenCancel := context.WithTimeout(context.Background(), time.Minute)
 	defer listenCancel()
 
 	// Create an onion service to listen on 8080 but show as 80

