@@ -6,7 +6,7 @@ import (
 	b64 "encoding/base64"
 	"fmt"
 	"github.com/x3419/TorMent/Server/execute-assembly"
-	"github.com/x3419/TorMent/Server/tor"
+	"github.com/x3419/TorMent/Server/tor/tor"
 	"io/ioutil"
 	"log"
 	"net/http"
