@@ -1,5 +1,5 @@
 ## TorgoBot
-#### PoC Golang malware for educational purposes only.
+#### PoC Golang remote administration tool for educational purposes only. 
 ###### Note: This project is in BETA
 
 ### Features
